@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation Twig{% endblock %}
+
+        {% block javascripts %}
+        <script src="{{ asset ("js/hinclude.js ") }}"></script>
+        {% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <h2>Twig - Filtres et fonctions</h2>
+
+    <p> {{ html | raw }}</p>
+    {# Les balises <strong> de $html, dans le controller, sont lues comme des string !
+    elles sont donc portégées de la faille XSS
+     Pour interpréter le HTML, on met le filtre Raw #}
+
+    {# Poura afficher la date, il faut la filtrer avec le filtre date #}
+    <p>{{ date | date("d/m/Y") }}</p>
+
+    <p>{{ 'je suis un texte en majuscule' | upper }}</p>
+
+    <p>Nombre de valeur = {{ range ( 0,10) | length }}</p>
+
+    <hr/>
+
+    {{ include('twig/include.html') }}
+
+    <hr/>
+
+    {{ include('twig/include.html.twig', {message : "Message d'inclusion : "}) }}
+
+    <hr/>
+
+    {#{{ render(controller('App\\Controller\\TwigController::video',  {'superman' : 2 })) }}
+     Pour charger la video de manière insachrome  : hinclude#}
+    {{ render_hinclude(controller('App\\Controller\\TwigController::video',  {'superman' : 2 })) }}
+
+
+{% endblock %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <!--- liens bootstrap, ect... -->
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+{{ render(controller('App\\Controller\\ServiceController::noroute')) }}
+    <header>
+
+        <h1>Formation Symfony </h1><hr/> </header>
+
+<div>
+    <p>
+        <a href="{{ url('traduction_index') }}">Traduction</a>
+        {% if app.user %}
+    Hello {{ app.user.username }}
+    <a href="{{ url('authentification_logout') }}">Déconnexion</a>
+        {% else %}
+            {% if app.request.pathInfo != path('authentification_login') %}
+            <a href="{{ url('authentification_login') }}">Connexion</a>
+                {% endif %}
+        {% endif %}
+    </p>
+</div>
+
+    {% block body %}
+        {% endblock %}
+        {% block javascripts %}{% endblock %}
+
+    <footer>
+        <hr/>
+        Dawan Formation |  Symfony |  Lille | Février 2019
+    </footer>
+    </body>
+</html>

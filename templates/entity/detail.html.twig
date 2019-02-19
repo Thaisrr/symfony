@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaire de Livres{% endblock %}
+
+{% block body %}
+
+    <dl>
+        <dt>Titre</dt>
+        <dd>{{ livre.titre }}</dd>
+
+        <dt>Resume</dt>
+        <dd>{{ livre.resume | raw}}</dd>
+
+        <dt>Parution</dt>
+        <dd>{{ livre.parution | date("d/m/Y") }}</dd>
+
+
+
+    </dl>
+
+{% endblock %}

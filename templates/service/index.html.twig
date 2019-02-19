@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ServiceController!{% endblock %}
+
+{% block body %}
+
+  <p>  {{ message }} </p>
+
+  {% if auteur_exist %}
+    <p>L'auteur avec l'id 1 existe.</p>
+  {% else %}
+    <p>L'auteur avec l'id 1 n'existe pas.</p>
+  {% endif %}
+
+    <li><a href="{{ url('sandbox') }}">Retour à l'Accueil</a></li>
+
+{% endblock %}

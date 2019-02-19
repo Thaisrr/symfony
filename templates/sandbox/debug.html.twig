@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Debug {% endblock %}
+
+{% block body %}
+
+    <h1>Outils de débug et autres</h1>
+
+    <ul>
+        <li>Débugger une variable ( voir son contenu )</li>
+        <li>Comment créer des liens entre les pages</li>
+        <li>Transmettre des param d'URL</li>
+        <li>Accéder à la session de ma page</li>
+    </ul>
+
+    <hr/>
+    <p>Pour retourner sur Sandbox, cliquez ici : <a href="{{ path('sandbox') }}">Pouff</a></p>
+    <p>Pour aller sur Param, cliquez ici : <a href="{{ path('param') }}">Pouff</a></p>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Best Videos Ever{% endblock %}
+
+{% block body %}
+
+
+    <h1>Best Musics Ever</h1>
+    <hr/>
+
+
+    <a href="{{ url('videos', {"name":"video1"}) }}">The Puta Madres</a> |
+    <a href="{{ url('videos', {"name":"video2"}) }}">Powerwolf</a> |
+    <a href="{{ url('videos', {"name":"video3"}) }}">Super Turbo Atomic Ninja Rabbit</a>
+    <a href="{{ url('videos', {"name":"video4"}) }}">404</a>
+
+<p>
+  <iframe id ="video1" width="537" height="302" src="https://www.youtube.com/embed/{{ code }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<hr/>
+    <p>Pour retourner sur Sandbox, cliquez ici : <a href="{{ path('sandbox') }}">Pouff</a></p>
+
+
+{% endblock %}

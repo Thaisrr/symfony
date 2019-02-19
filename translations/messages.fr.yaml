@@ -1,0 +1,7 @@
+lang.fr: Français
+lang.en: Anglais
+Welcome: "Bienvenue !"
+information: "Vous venez de pénétrer dans une zone de traduction de chaînes de caractères."
+visitor:
+    count: "Vous êtes seul sur le site | Il y a %count% personnes sur le site"
+info.message: "{0} Vous n'avez aucun message | {1} Vous avez 1 message | ]1, Inf] Vous avez plusieurs messages"

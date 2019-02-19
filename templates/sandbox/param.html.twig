@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Param {% endblock %}
+
+{% block body %}
+
+    <h1>Les paramètres d'URL</h1>
+
+   <p>Hello {{ name }}</p>
+    <p>{{ name }} a {{ age }} ans</p>
+
+    <p>
+        <a href="{{ url('param', {"name": "mithrandir", "age":"xxx"}) }}">Gandalf</a>
+        <a href="{{ url('param', {"name": "voldemort", "age":"+- 70"}) }}">Voldy</a>
+    </p>
+
+    <hr/>
+    <h2>Messages dans ma session</h2>
+    <p>{{ app.session.get('message') }}</p>
+
+    <hr/>
+    <p>Pour retourner sur Sandbox, cliquez ici : <a href="{{ path('sandbox') }}">Pouff</a></p>
+
+{% endblock %}

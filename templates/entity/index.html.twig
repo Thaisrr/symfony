@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaire de Livres{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('success') %}
+        {{ message }}
+    {% endfor %}
+
+
+
+    <dl>
+        <dt>Titre</dt>
+        <dd>{{ livre.titre }}</dd>
+
+        <dt>Resume</dt>
+        <dd>{{ livre.resume | raw}}</dd>
+
+        <dt>Parution</dt>
+        <dd>{{ livre.parution | date("d/m/Y") }}</dd>
+
+        <p>
+            <a href="{{ url('entity_index', {'action' : 'save'}) }}">Ajouter ce livre</a>
+        </p>
+
+    </dl>
+
+{% endblock %}

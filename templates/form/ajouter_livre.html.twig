@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout de Livres{% endblock %}
+
+{% block body %}
+
+<h2>Ajouter un Livre</h2>
+
+{% for message in app.flashes('success') %}
+    {{ message }}
+{% endfor %}
+
+{{ form_start(formView) }}
+    <p>
+{{ form_label(formView.titre) }}
+{{ form_widget(formView.titre) }}
+{{ form_errors(formView.titre) }}
+    </p>
+    <p>
+{{ form_label(formView.parution) }}
+{{ form_widget(formView.parution) }}
+    </p>
+    <p>
+{{ form_label(formView.resume) }}
+{{ form_widget(formView.resume) }}
+    </p>
+    {{ form_end(formView) }}
+
+{% endblock %}

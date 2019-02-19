@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Traduction Controller{% endblock %}
+
+{% block body %}
+
+    <a href="{{url ('traduction_index', {'_locale':'en' }) }}">{{ 'lang.en' | trans }}</a>
+    <a href="{{url ('traduction_index', {'_locale':'fr'}) }}">{{ 'lang.fr' | trans }}</a>
+
+    <h3>{{ 'Welcome' | trans }}</h3>
+    <p>{{ information }}</p>
+    <p>{{ 'visitor.count' | transchoice(count,  {'%count%': count }) }}</p>
+    <p>{{ 'info.message' | transchoice(0) }}</p>
+    <p>{{ 'info.message' | transchoice(1) }}</p>
+    <p>{{ 'info.message' | transchoice(100) }}</p>
+
+
+
+{% endblock %}

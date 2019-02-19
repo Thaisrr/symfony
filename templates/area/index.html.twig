@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AreaController!{% endblock %}
+
+{% block body %}
+
+    <h2>Accueil Utilisateur</h2>
+
+    <p> Pour accéder aux pages sécurisées, cliquez sur le lien approprié : </p>
+    <ul>
+        <li><a href="{{ url('area_admin_info') }}">Admin</a></li>
+        <li><a href="{{ url('area_modo_info') }}">Modérateur</a></li>
+        <li><a href="{{ url('area_user_info') }}">User</a></li>
+        <li><a href="{{ url('sandbox') }}">Retour à l'Accueil</a></li>
+    </ul>
+
+    <ul>
+        {% if is_granted('ROLE_ADMIN') %}
+        <li>Lien vers des trucs cools</li>
+        <li>Actions marrantes</li>
+        {% endif %}
+        {% if is_granted('ROLE_MODO') %}
+        <li>Des trucs relativement marrants</li>
+        <li>D'autres bidules moins cools que les trucs d'admin</li>
+        {% endif %}
+    </ul>
+
+{% endblock %}

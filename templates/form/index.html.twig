@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire{% endblock %}
+
+{% block body %}
+
+    {# méthode 1 :   {{ form(formView) }} fonction form créee pour Twig pour lire les form créés via Symfony#}
+
+{#Méthode 2 : #}
+
+    {{ form_start(formView) }}
+
+    {{ form_widget(formView) }} {# pour demander d'afficher tous les champs du formulaire#}
+
+    {{ form_end(formView) }}
+    <input type="submit" name="envoyer" value="envoyer">
+
+{% endblock %}

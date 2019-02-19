@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestionnaire de Livres{% endblock %}
+
+{% block body %}
+    <h2>Liste des livres</h2>
+
+
+  <!--  <table border="1 black" cellspacing="0" cellpadding="5" width="90%"> -->
+        <tr>
+            <td>ID</td>
+            <td>Titre</td>
+            <td>Auteur</td>
+            <td>Résumé</td>
+            <td>Parution</td>
+        </tr>
+
+        <tr>
+            {% for livre in livres%}
+            <td>{{ livre.id }}</td>
+            <td>{{ livre.titre }}</td>
+            <td>{{ livre.auteur.prenom~' '~livre.auteur.nom }}</td>
+            <td>{{ livre.resume }}</td>
+            <td>{{ livre.parution | date('d/m/Y')}}</td>
+            {% else %}
+          <td colspan="5" style="text-align: center; color: red" > Aucun résultat trouvé</td>
+            {% endfor %}
+        </tr>
+
+
+
+
+    </table>
+
+
+{% endblock %}

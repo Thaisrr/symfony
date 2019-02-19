@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation Twig{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+
+    <h2>Twig - Fonctionnalités</h2>
+
+
+    <h3>Afficher le contenu d'une variable avec &#123;&#123; ... &#125;&#125; </h3>
+    <p>Mon Message = {{ mon_message }}</p>
+
+    <h3>Fonctions Twig développées par Symfony : </h3>
+
+    <p>Path = {{ path('twig') }}</p>
+    <p>Url = {{ url('twig') }}</p>
+    <p> {{ person }}</p> {# appelle le toString de la classe#}
+    <p> Hello {{ person.prenom ~ ' ' ~ person.nom}} !</p> {#Cherche le getPrenom dans la classe | ~' blabla'~ => concaténation#}
+
+    <ul>
+    {% for key, name in liste %}
+        <li>{{ key }} : {{ name }}</li>
+    {% endfor %}
+    </ul>
+
+    {% set pseudo = "Daenerys" %}
+    <p>variable locale Pseudo = {{ pseudo }}</p>
+
+    <ul>
+    {% for elt in tab %} {#Twig propose des else dans les for : si for est vide, alors #}
+        <li>{{ elt }}</li>
+        {% else %}
+        <li>Aucune donnée</li>
+    {% endfor %}
+    </ul>
+
+    <ul>
+        {% for user in users if user.active %} {#Twig propose des if dans les for : si  user est actif#}
+            <li>{{ user.prenom~' '~user.nom }}</li>
+        {% else %}
+            <li>Aucune donnée</li>
+        {% endfor %}
+    </ul>
+
+    {% if users[0].active %}
+        {{ users[0].prenom~' '~ users[0].nom~ ' - Still alive ! ' }}
+    {% else %}
+        {{ users[0].prenom~' '~ users[0].nom~ ' - Still alive ! ' }}
+
+    {% endif %}
+
+    {% set number = 5  %}
+    <p>{{ number }} est-il impaire ? {{ (number is odd)? 'Oui.' : 'Non.' }}</p> {#renvoie 1 / oui si true #}
+    <p>{{ number }} est-il paire ? {{ (number is even)? 'Oui.' : 'Non.' }}</p>
+
+    <p>{{ number }} est-il présent dans la liste ? {{ (number in [3,4,5,6])? 'oui' : 'non' }}</p>
+    <p>{{ number }} est-il compris entre 1 et 10 ? {{ (number in 0..10)? 'oui' : 'non' }}</p> {# valeures comprisent entre 0 et 10, existe aussi pour alphabétique a..z #}
+
+
+{% endblock %}

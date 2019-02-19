@@ -1,0 +1,7 @@
+lang.fr: French
+lang.en: English
+Welcome: "Welcome !"
+information: "You've just entered a string translation area."
+visitor:
+    count: "You're the only one connected | There are %count% persons connected"
+info.message: "{0} No message | {1} 1 message| ]1, Inf] Several messages"

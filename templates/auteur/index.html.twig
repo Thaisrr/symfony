@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Auteur{% endblock %}
+
+{% block body %}
+
+    <h2>Ajouter un auteur</h2>
+
+    {% for message in app.flashes('success') %}
+        {{ message }}
+    {% endfor %}
+
+    {{ form_start(formView) }}
+    {{ form_widget(formView) }}
+    {{ form_errors(formView) }}
+    {{ form_end(formView) }}
+
+{% endblock %}

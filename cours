@@ -1,0 +1,156 @@
+Install Symfony :
+***************
+
+-> sur le site, lien composer ou exe
+-> via composer : install in wamp www, name new project
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Architecture :
+
+vendor : dépendances
+src : sources -> les controllers, code métier
+bin : console, cmd spécifiques au projets exe avec terminal
+
+config :
+    -yaml : langage qui se découpe ( =parse ), attention à la syntaxe ( espaces, ect )
+    - package : doctrine, ect...
+    - cf la doc Symfony pour les cmd à taper pour config
+public : pt d'entrée du projet, (index -> démarreur ) ( on y mets les fichiers css, et autres )
+controler : mvc,
+entity : géré par Doctrine, Modéle de mvc
+template : les vues de MVC
+    -base.html.twig : moteur de templates ( Twig ), écrit en Php
+test : test unitaires
+translation : traduction
+var : gestion de fichiers, caches, ect
+.env : particularité de Symfony 3.4, et 4 : gestion des environnements
+    - environnement de dév, avec echo, débugages, ect...: pour dév, pour tester base de donnée de dev, non réelle
+    - environnement de test : test automatisés qui test les différentes pages.On peut utiliser des Mocs, pour simuler l'accés de la bdd
+    - environnement de production : affichage des trucs réels, base de donnée réelle
+    -> on y trouve APP_ENV-dev : fichier qui dit qu'on est en dév
+    -> APP_SECRET : pour éviter envoie de demandes massive de pirates : clef de sécurité
+    -> DATABASE_URL : connexion à la bdd
+    ->MAILER_URL : configurer l'envoie des mails
+
+-----------------------------------------------------------------------------------------------------------------------
+
+dans la console, sur le projet : php bin/console : liste des consoles
+    ->make:controller : génére le controller
+            -> crée le controller + la vue correspondante dans Template
+            ->dans Symfony, la route est dans une annotation, sur le controller
+            -> si on veut les mettre dans un fichier à part :
+                -> dans routes.yaml
+            -> vérifier ht access
+            -> php bin/console server:run : adresse serveur
+            -> dans bin : les cmd peuvent être raccourcies : php/console s:r
+            -> index() -> renvoie une variable avec adresse + tableau
+
+-----------------------------------------------------------------------------------------------------------------------
+
+    -> systéme de routage : URL
+            - dans l'annotation @Route, changer l'extention de l'url d'une page en dev :
+            -> @Route "/lien.{_format}"
+            ->requirements={"_format": "html|php" } : oblige l'extension .html ou .php dans l'url
+            -> dans ce cas, si c'est un param obligatoire, dans le lien vers la page, on transmet un lien json
+             <a href="{{ path('debug', {"_format": "html"})  }}">Pouff</a>
+             -> {"_format balbalbla}" -> variable json
+            -> si l'extention n'est pas obligatoire : ( cf : sandbox / debug )
+              - @Route niah niah nia defaults={"_format": "html|php"}, requirements={"_format": "html|php"}
+            ->  requirements={ "name": "[a-z\s]+"} // pour gérer la route : de a à z; avec espaces, de 0 à + de caractères
+              // pour gérer la route : de a à z; avec espaces, de 0 à + de caractères
+            ->query param : dans l'objet Request
+
+            autres servives possibles depuis le controller de routage :
+             -> 404
+             -> redirection vers une autre page
+             ->forware
+
+     -> SESSION
+            -> app.session.get('message')
+            - pour récupérer une clef dans ma session
+
+-----------------------------------------------------------------------------------------------------------------------
+
+Twig :
+*****
+
+intéret :
+    -crée de la mise en cache
+    - ( en prod, pas en cache )
+
+-> extend : de base.html.twig :
+    -> héritage de la vue Base
+
+  -> block : {% block nomdublock %} ( +endblock )
+        -> affichage dynamique, qu'on va alimenter ( ou pas )
+        -> dans les héritiers, on retrouve ces blocks, qu'on peut ou non alimenter
+        -> ( title de base, header, footer, div, ect... )
+        -> on peut mettre des éléments par défauts, qui s'afficheront si les blocks ne sont pas alimentés dans les enfants.
+        -> on peut alimenter le block ET appeler le parent, grace à {{ parent() }} ( = parent:: de php )
+-----------------------------------------------------------------------------------------------------------------------
+
+Entity :
+    -> Modèle
+
+
+    -> php bin/console make:controller -> Entity
+    -> php bin/console make:entity -> nom de la bdd, et nom et caractéristiques des champs de la bdd
+        -> dans src : folder Entity -> classe entity
+        -> erreurs soulignées en rouges dans la classe, dues au langage / à laisser ?
+        -> dans repository : on retrouve la table créée
+    -> .env : configurer data base
+    -> php bin/console doctrine:database:create
+    -> Fonctionne avec Doctrine.
+
+migration vers database :
+    -> php bin/console doctrine:database:create -> crée la bdd
+    -> php bin/console make:migration -> migre la table créée précedemment vers la bdd
+    -> php bin/console doctrine:migration:execute numérodeversion --up ou --down ( down : retour en arrière )
+    -> Il faut faire la migration en Up, pour que la bdd prenne en compte les modifications
+
+Insérer des éléments dans la table :
+     -> dans le controller !
+
+       Requete sql :
+       (cf repository
+       LIKE %machin% -> qui commence, ou qui fini, ou qui contient Machin, ou qui commence et termine par machin
+
+--------------------------------------------------------------------------------------------------
+
+       Creation de formulaire via Symfony
+       -> dans controller
+       -> ou via terminal si relié à une Entity - donc bdd
+
+------------------------------------------------------------------------------------------------------------------------
+Sécurité et droits :
+
+( admin / users / anonym )
+
+-> dans Config, security.yaml
+    - Provider : endroit où seront enregistrés les utilisateurs authentifiés
+    - Gestion des users en BDD, en mémoire, ou grace à un server distant
+    - Firewall : pour controller les accès :
+        -> permet d'indiquer les règles d'authentification, de redirection, rôles, page de connection
+    - Access control
+
+-> FOS user bundle : avec tout le système de sécurité déjà écrit.
+
+-> Enregistrement mémoire ( en dur, hors bdd ) :
+        -> provider: in memory: memory: user: { password: user, role: ['ROLE_USER'] }
+
+-> le login doit être dans l'administration : /admin/login
+    -> il faut ensuite permettre au lien /admin/login d'être accessible aux users
+    ( dans le security.yaml )
+
+    security:encode-password
+
+ ----------------------------------------------
+    cycle de vie des entités :
+
+    fonction appelable à certains moments précis du fonctionnement de l'application
+    ->preRemove / postRemove : juste avant ou juste aprés la suppression d'un élément
+    ->@kfjkjd ORM\
+
+    -> dans les assesseurs :
+    -> public function
